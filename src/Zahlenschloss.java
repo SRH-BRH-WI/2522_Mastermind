@@ -2,6 +2,12 @@ import java.util.Scanner;
 
 public class Zahlenschloss {
 
+    // Einführung von Methoden (aka Funktionen, Prozeduren, Unterprogramme, ...)
+    public static void ausgabeVersuche(int anzahlVersuche) {
+        System.out.println("Sie haben " + anzahlVersuche + " Versuche gebraucht.");
+    }
+
+    // Das ist unser "Hauptprogramm"
     public static void main(String[] args) {
 
         int geheimeZahl = 473;
@@ -15,22 +21,25 @@ public class Zahlenschloss {
         // beenden.
 
         Scanner eingabe = new Scanner(System.in);
+        int versuchsZähler = 0;
 
         // Wir bauen eine Endlosschleife
         while ( true ) {
             System.out.print("Bitte Tipp abgeben: ");
             int zahl = eingabe.nextInt();
+            versuchsZähler++;
 
             // Fall 1
             if (zahl == geheimeZahl) {
                 System.out.println("Herzlichen Glückwunsch, das war die geheime Zahl!");
-                // Ende, oder?
+                ausgabeVersuche( versuchsZähler );
                 break;
             }
 
             // Fall 2
             if (zahl == 0) {
                 System.out.println("Schade, viel Glück beim nächsten Mal");
+                ausgabeVersuche( versuchsZähler );
                 break;
             }
 
