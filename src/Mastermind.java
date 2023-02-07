@@ -12,7 +12,19 @@ public class Mastermind {
 
     // Das ist unser "Hauptprogramm"
     public static void main(String[] args) {
-        int geheimeZahl = 473;
+        Scanner eingabe = new Scanner(System.in);
+
+        int anzahlZuErratenenZiffern = 0;
+        do {
+            System.out.print("Wieviele Ziffern sollen erraten werden: ");
+            anzahlZuErratenenZiffern = eingabe.nextInt();
+        } while (anzahlZuErratenenZiffern < 2 || anzahlZuErratenenZiffern > 8);
+
+        int geheimeZahl = 0;
+        do {
+            double faktor = Math.pow(10, anzahlZuErratenenZiffern);
+            geheimeZahl = (int) (Math.random() * faktor);  // explizite Typkonvertierung
+        } while ( ! istGeeigneteGeheimzahl(geheimeZahl, anzahlZuErratenenZiffern) );
 
         // TODO
         // Der Anwender soll eine Zahl eingeben.
@@ -26,7 +38,6 @@ public class Mastermind {
         //      rateZahl    = 321   Tipp: 1 Ziffer vorhanden
         //      rateZahl    = 689   Tipp: nix richtig
 
-        Scanner eingabe = new Scanner(System.in);
         int versuchsZähler = 0;
 
         // Wir bauen eine Endlosschleife
@@ -34,7 +45,11 @@ public class Mastermind {
             System.out.print("Bitte Tipp abgeben: ");
             int zahl = eingabe.nextInt();                   // lokale Variable
             versuchsZähler++;
-            if (zahl == 0) break;
+            if (zahl == 0) {
+                System.out.println("Schade, viel Glück beim nächsten Mal");
+                System.out.println("Die Geheimzahl war " + geheimeZahl);
+                break;
+            }
             if (zahl == geheimeZahl) {
                 System.out.println("Herzlichen Glückwunsch, das ist die korrekte Zahl");
                 break;
@@ -43,6 +58,16 @@ public class Mastermind {
         }
         System.out.println("Sie haben " + versuchsZähler + " Versuche gebraucht.");
         System.out.println("Auf Wiedersehen!");
+    }
+
+    private static boolean istGeeigneteGeheimzahl(int geheimeZahl,
+                                                  int anzahlGeforderterVerschiedeneZiffern) {
+
+        int anzahlVerschiedenerZiffern = 0;
+        for (int ziffer=0; ziffer < 10; ziffer++)
+            if (prüfeObZifferVorhanden(ziffer, geheimeZahl))
+                anzahlVerschiedenerZiffern++;
+        return (anzahlVerschiedenerZiffern == anzahlGeforderterVerschiedeneZiffern);
     }
 
     // Aufbau einer Methode:
