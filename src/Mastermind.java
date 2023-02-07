@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Zahlenschloss {
+public class Mastermind {
 
     // Einführung von Methoden (aka Funktionen, Prozeduren, Unterprogramme, ...)
     public static void ausgabeVersuche(int anzahlVersuche) {
