@@ -43,7 +43,19 @@ public class Zahlenschloss {
                 break;
             }
 
-            System.out.println("Sorry, aber diese Zahl ist falsch");
+            // Etwas bessere Hilfestellung beim Erraten der Zahl
+            if (zahl - 200 > geheimeZahl )
+                System.out.println("Die Zahl ist viel zu groß");
+            else if (zahl - 50 > geheimeZahl)
+                System.out.println("Die Zahl ist zu groß");
+            else if (zahl > geheimeZahl)
+                System.out.println("Die Zahl ist etwas zu groß");
+            else if (zahl + 200 < geheimeZahl)
+                System.out.println("Die Zahl ist viel zu klein");
+            else if (zahl + 50 < geheimeZahl)
+                System.out.println("Die Zahl ist zu klein");
+            else // if (zahl < geheimeZahl)
+                System.out.println("Die Zahl ist etwas zu klein");
         }
         System.out.println("Auf Wiedersehen!");
     }
